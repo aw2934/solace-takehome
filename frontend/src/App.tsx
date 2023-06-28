@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { updateNote } from './api/api';
+import { deleteNote, updateNote } from './api/api';
 import { Note } from './components/Note';
 import { Note as NoteType } from './types';
 
@@ -20,7 +20,13 @@ const App: React.FC = () => {
     const response = await updateNote({ id, note: newContent });
     const newNotesList: NoteType[] = await response.json();
     setNotes(newNotesList);
-  }
+  };
+
+  const handleDeleteNote = async (id: number) => {
+    const response = await deleteNote({ id });
+    const newNotesList: NoteType[] = await response.json();
+    setNotes(newNotesList);
+  };
 
   return (
     <div className="App">
@@ -29,6 +35,7 @@ const App: React.FC = () => {
           <Note
             content={note}
             onUpdate={(newContent) => handleUpdateNote(newContent)(id)}
+            onDelete={() => handleDeleteNote(id)}
           />
         </div>
       ))}

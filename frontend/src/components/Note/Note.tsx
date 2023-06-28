@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 interface Props {
   content: string;
   onUpdate: (newContent: string) => void;
+  onDelete: () => Promise<void>;
 }
 
-const Note: React.FC<Props> = ({ content, onUpdate }) => {
+const Note: React.FC<Props> = ({ content, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [noteContent, setNoteContent] = useState(content);
 
@@ -30,6 +31,7 @@ const Note: React.FC<Props> = ({ content, onUpdate }) => {
         <div>
           <p>{content}</p>
           <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button onClick={onDelete}>Delete</button>
         </div>
       )}
     </div>

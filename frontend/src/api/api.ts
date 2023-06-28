@@ -14,3 +14,15 @@ export const updateNote = async ({ id, note }: UpdateProps) => {
 
   return result;
 };
+
+export const deleteNote = async ({ id }: { id: number }) => {
+  const result = await fetch('/notes', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id })
+  });
+
+  return result;
+};
