@@ -3,6 +3,18 @@ interface UpdateProps {
   note: string;
 }
 
+export const addNote = async ({ note }: { note: string }) => {
+  const result = await fetch('/notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ note })
+  });
+
+  return result;
+};
+
 export const updateNote = async ({ id, note }: UpdateProps) => {
   const result = await fetch('/notes', {
     method: 'PUT',
