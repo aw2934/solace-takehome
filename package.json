@@ -1,0 +1,25 @@
+{
+  "name": "solace-takehome",
+  "version": "1.0.0",
+  "description": "take-home for solace",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "server": "nodemon ./backend/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "pg": "^8.11.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.3.2",
+    "@types/pg": "^8.10.2",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.1.5"
+  }
+}
