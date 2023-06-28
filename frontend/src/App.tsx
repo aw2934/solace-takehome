@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { BASE_URL } from './constants';
+import { updateNote } from './api/api';
+import { Note } from './components/Note';
+import { Note as NoteType } from './types';
 
 const App: React.FC = () => {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState<NoteType[]>([]);
 
   useEffect(() => {
     const getNotes = async () => {
       const res = await fetch(`/notes`);
-      const notesJson = await res.json();
-      setNotes(notesJson);
+      const notesList: NoteType[] = await res.json();
+      setNotes(notesList);
     };
     getNotes();    
   }, []);
 
+  const handleUpdateNote = (newContent: string) => async (id: number) => {
+    const response = await updateNote({ id, note: newContent });
+    const newNotesList: NoteType[] = await response.json();
+    setNotes(newNotesList);
+  }
+
   return (
     <div className="App">
+      {notes.map(({ id, note }) => (
+        <div key={id}>
+          <Note
+            content={note}
+            onUpdate={(newContent) => handleUpdateNote(newContent)(id)}
+          />
+        </div>
+      ))}
     </div>
   );
 }
