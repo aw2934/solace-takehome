@@ -52,13 +52,12 @@ const App: React.FC = () => {
         placeholder="Search notes"
       />
       {filteredNotes.map(({ id, note }) => (
-        <div key={id}>
-          <Note
-            content={note}
-            onUpdate={(newContent) => handleUpdateNote(id, newContent)}
-            onDelete={() => handleDeleteNote(id)}
-          />
-        </div>
+        <Note
+          key={id}
+          content={note}
+          onUpdate={(newContent) => handleUpdateNote(id, newContent)}
+          onDelete={() => handleDeleteNote(id)}
+        />
       ))}
       <NoteInput onSubmit={handleAddNote} />
     </div>
