@@ -3,14 +3,10 @@ import './App.css';
 import { addNote, deleteNote, updateNote } from './api/api';
 import { Note } from './components/Note';
 import { Note as NoteType } from './types';
+import { NoteInput } from './components/NoteInput';
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
-  const [newNote, setNewNote] = useState('');
-
-  const showNewNoteErrorState = newNote.length > 0 && (
-    newNote.length < 20 || newNote.length > 300
-  );
 
   useEffect(() => {
     const getNotes = async () => {
@@ -40,7 +36,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       {notes.map(({ id, note }) => (
         <div key={id}>
           <Note
@@ -50,27 +46,7 @@ const App: React.FC = () => {
           />
         </div>
       ))}
-      <div className="add-new-note">
-        <h4 className="heading">Add new note</h4>
-        <textarea
-          value={newNote}
-          onChange={e => setNewNote(e.target.value)}
-          className="text-area"
-          placeholder="Must be between 20 and 300 characters."
-        />
-        <p className="char-count">
-          <span className={showNewNoteErrorState ? 'count-error' : ''}>
-            {newNote.length}{' '}
-          </span>
-          / 300
-        </p>
-        <button
-          onClick={() => handleAddNote(newNote)}
-          disabled={showNewNoteErrorState || newNote.length === 0}
-        >
-          Add note
-        </button>
-      </div>
+      <NoteInput onSubmit={handleAddNote} />
     </div>
   );
 }

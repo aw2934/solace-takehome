@@ -1,0 +1,22 @@
+.note-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin-bottom: 8px;
+}
+
+.text-area {
+  min-width: 400px;
+  min-height: 200px;
+}
+
+.char-count {
+  align-self: flex-end;
+  margin-top: 0.5rem;
+}
+
+.count-error {
+  color: red;
+}
