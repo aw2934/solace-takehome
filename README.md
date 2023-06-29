@@ -2,6 +2,8 @@
 
 Pull down the project, and run `npm run install:dev` to install dependencies. (This command will install both client and server dependencies.)
 
+Create a `.env` file in the `backend` directory, and add `POSTGRES_SECRET` to enable connection to the database.
+
 Run `npm run dev` to launch the app. This command will launch both the client and the server.
 
 # Missing Pieces
