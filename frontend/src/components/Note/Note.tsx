@@ -11,7 +11,6 @@ interface Props {
 const Note: React.FC<Props> = ({ content, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  // add loading state
   const handleUpdate = async (noteContent: string) => {
     onUpdate(noteContent);
     setIsEditing(false);

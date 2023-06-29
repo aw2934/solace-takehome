@@ -7,6 +7,7 @@ import { NoteInput } from './components/NoteInput';
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
+  const [searchTerms, setSearchTerms] = useState('');
 
   useEffect(() => {
     const getNotes = async () => {
@@ -35,9 +36,22 @@ const App: React.FC = () => {
     setNotes(newNotesList);
   };
 
+  const filteredNotes = searchTerms == null
+    ? notes
+    : notes.filter(({ note }) => {
+      const comparator = new RegExp(searchTerms);
+      return comparator.test(note);
+    });
+
   return (
     <div className="app">
-      {notes.map(({ id, note }) => (
+      <input
+        value={searchTerms}
+        onChange={e => setSearchTerms(e.target.value)}
+        className="search-bar"
+        placeholder="Search notes"
+      />
+      {filteredNotes.map(({ id, note }) => (
         <div key={id}>
           <Note
             content={note}
