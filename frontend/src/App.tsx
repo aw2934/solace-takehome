@@ -23,7 +23,7 @@ const App: React.FC = () => {
     setNotes(newNotesList);
   };
 
-  const handleUpdateNote = (newContent: string) => async (id: number) => {
+  const handleUpdateNote = async (id: number, newContent: string) => {
     const response = await updateNote({ id, note: newContent });
     const newNotesList: NoteType[] = await response.json();
     setNotes(newNotesList);
@@ -41,7 +41,7 @@ const App: React.FC = () => {
         <div key={id}>
           <Note
             content={note}
-            onUpdate={(newContent) => handleUpdateNote(newContent)(id)}
+            onUpdate={(newContent) => handleUpdateNote(id, newContent)}
             onDelete={() => handleDeleteNote(id)}
           />
         </div>

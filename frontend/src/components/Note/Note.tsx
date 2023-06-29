@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NoteInput } from '../NoteInput';
 
 interface Props {
   content: string;
@@ -11,20 +12,16 @@ const Note: React.FC<Props> = ({ content, onUpdate, onDelete }) => {
   const [noteContent, setNoteContent] = useState(content);
 
   // add loading state
-  const handleUpdate = () => {
-    onUpdate(noteContent);
-    setIsEditing(false);
+  const handleUpdate = async () => {
+      onUpdate(noteContent);
+      setIsEditing(false);
   };
 
   return (
     <div>
       {isEditing ? (
         <div>
-          <textarea
-            value={noteContent}
-            onChange={e => setNoteContent(e.target.value)}
-          />
-          <button onClick={handleUpdate}>Submit</button>
+          <NoteInput note={content} onSubmit={handleUpdate} />
           <button onClick={() => setIsEditing(false)}>Cancel</button>
         </div>
       ) : (

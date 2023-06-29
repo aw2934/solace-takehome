@@ -7,7 +7,7 @@ interface Props {
 }
 
 const NoteInput: React.FC<Props> = ({ note, onSubmit }) => {
-  const [newNote, setNewNote] = useState('');
+  const [newNote, setNewNote] = useState(note || '');
 
   const showNewNoteErrorState = newNote.length > 0 && (
     newNote.length < 20 || newNote.length > 300
@@ -36,6 +36,7 @@ const NoteInput: React.FC<Props> = ({ note, onSubmit }) => {
       <button
         onClick={handleSubmit}
         disabled={showNewNoteErrorState || newNote.length === 0}
+        className="submit-button"
       >
         Submit
       </button>
